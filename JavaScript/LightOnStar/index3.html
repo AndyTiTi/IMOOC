@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        html * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            width: 170px;
+            list-style: none
+        }
+
+        .rating-item {
+            width: 34px;
+            height: 34px;
+            float: left;
+            background: url('./star.png') 0px 0px no-repeat;
+        }
+    </style>
+</head>
+<body>
+<ul id="rating" class="rating">
+    <li class="rating-item"></li>
+    <li class="rating-item"></li>
+    <li class="rating-item"></li>
+    <li class="rating-item"></li>
+    <li class="rating-item"></li>
+</ul>
+<ul id="rating2" class="rating">
+    <li class="rating-item"></li>
+    <li class="rating-item"></li>
+    <li class="rating-item"></li>
+    <li class="rating-item"></li>
+    <li class="rating-item"></li>
+</ul>
+<script>
+    var rating = (function () {
+        var lightOn = function ($Item, num) {
+            $Item.each(function (i, v) {
+                if (i < num) {
+                    $(this).css("background-position", "-1px -40px")
+
+                } else {
+                    $(this).css("background-position", "0px 0px")
+                }
+            })
+        }
+
+        var init = function (ele, num) {
+            var $rating = $(ele);
+            var $Item = $rating.find('.rating-item');
+
+            lightOn($Item, num);
+
+            $rating.on('mouseover', '.rating-item', function () {
+                lightOn($Item, $(this).index() + 1);
+            }).on('click', '.rating-item', function () {
+                num = $(this).index() + 1;
+            }).on('mouseout', function () {
+                lightOn($Item, num);
+            })
+        }
+
+        // jQuery插件
+        $.fn.extend({
+            rating: function (num) {
+                return this.each(function () {
+                    init(this, num);
+                })
+            }
+        })
+
+        return {
+            init: init
+        }
+
+
+    })();
+
+    $('#rating,#rating2').rating(2);
+</script>
+</body>
+</html>

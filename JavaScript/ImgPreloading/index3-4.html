@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>图片预加载之有序加载</title>
+    <style>
+      a {
+        text-decoration: none;
+      }
+      .box {
+        text-align: center;
+      }
+      .box img {
+        height: 80vh;
+        width: 90vw;
+      }
+      .box .btn {
+        display: inline-block;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        padding: 0 10px;
+        margin-right: 50px;
+        color: #333;
+      }
+      .btn:hover {
+        background-color: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <img src="https://github.com/CruxF/IMOOC/blob/master/ProImages/ImgPreloading10.jpg?raw=true" title="无敌美少女一号" alt="一号" />
+      <p>
+        <a href="javascript:void(0);" class="btn" data-control="prev">上一页</a>
+        <a href="javascript:void(0);" class="btn" data-control="next">下一页</a>
+      </p>
+    </div>
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+      var imgs = [
+        'https://github.com/CruxF/IMOOC/blob/master/ProImages/ImgPreloading05.jpg?raw=true',
+        'https://github.com/CruxF/IMOOC/blob/master/ProImages/ImgPreloading06.jpg?raw=true',
+        'https://github.com/CruxF/IMOOC/blob/master/ProImages/ImgPreloading07.jpg?raw=true',
+        'https://github.com/CruxF/IMOOC/blob/master/ProImages/ImgPreloading02.jpg?raw=true',
+        'https://github.com/CruxF/IMOOC/blob/master/ProImages/ImgPreloading09.jpg?raw=true',
+        'https://github.com/CruxF/IMOOC/blob/master/ProImages/ImgPreloading01.jpg?raw=true'
+    ];
+      var len = imgs.length;
+      var count = 0;
+      var index = 0;
+      // 有序预加载
+      function load() {
+        var imgObj = new Image();
+        $(imgObj).on('load error', function() {
+          if(count >= len) {
+            // 所有图片加载完毕
+          } else {
+            load();
+          }
+          count++;
+        });
+        imgObj.src = imgs[count];
+      }
+      // 调用函数
+      load();
+      // 鼠标点击事件
+      $('.btn').on('click', function() {
+        if($(this).data('control') === 'prev') {
+          index = Math.max(0, --index);
+        } else {
+          index = Math.min(len - 1, ++index);
+        }
+        document.title = (index + 1) + '/' + len;
+        $('#img').attr('src', imgs[index])
+      });
+      // 为初始页面赋值
+      document.title = (index + 1) + '/' + len;
+      $('#img').attr('src', imgs[index])
+    </script>
+  </body>
+</html>

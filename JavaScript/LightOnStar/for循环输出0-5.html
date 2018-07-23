@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        html * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            width: 170px;
+            list-style: none
+        }
+
+        .rating-item {
+            width: 34px;
+            height: 34px;
+            float: left;
+            background: url('./star.png') 0px 0px no-repeat;
+        }
+    </style>
+</head>
+<body>
+<script>
+    for (let i = 0; i < 5; i++) {
+        setTimeout(function () {
+            console.log(new Date, i);
+        }, 1000*i)
+    }
+    console.log(new Date, i);
+
+    // for (var i = 0; i < 5; i++) {
+    //     (function(j){
+    //         setTimeout(function () {
+    //             console.log(new Date, j);
+    //         }, 1000*j)
+    //     })(i);
+    // }
+    // setTimeout(function(){
+    //     console.log(new Date, i);
+    // },1000*i)
+
+    // const tasks = [];
+    // for (var i = 0; i < 5; i++) {
+    //     ((j)=>{
+    //         tasks.push(
+    //             new Promise((resolve)=>{
+    //                 setTimeout(()=>{
+    //                     console.log(new Date,j);
+    //                     resolve();
+    //                 },1000*j)
+    //             })
+    //         )
+    //     })(i);
+    // }
+    // Promise.all(tasks).then(()=>{
+    //     setTimeout(()=>{
+    //         console.log(new Date,i);
+    //     },1000)
+    // })
+
+    // const taskss = [];
+    // const output = (i)=>new Promise((resolve)=>{
+    //     setTimeout(()=>{
+    //         console.log(new Date,i);
+    //         resolve();
+    //     },1000*i)
+    // })
+    // for (var i = 0; i < 5; i++) {
+    //     taskss.push(output(i));
+    // }
+    // Promise.all(taskss).then(()=>{
+    //     setTimeout(()=>{
+    //         console.log(new Date,i);
+    //     },1000)
+    // })
+
+    // var output = function(i){
+    //     setTimeout(function(){
+    //         console.log(new Date,i);
+    //     },1000)
+    // }
+    // for(var i=0;i<5;i++){
+    //     output(i);
+    // }
+
+    // const sleep = (times)=>new Promise((resolve)=> {
+    //     setTimeout(resolve, times);
+    // });
+    // (async()=>{
+    //     for (var i = 0; i < 5; i++) {
+    //     await sleep(1000)
+    //         ;
+    //         console.log(new Date, i);
+    //     }
+    // await sleep(1000);
+    //     console.log(new Date, i);
+    // })();
+    
+</script>
+</body>
+</html>
